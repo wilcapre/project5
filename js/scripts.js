@@ -16,25 +16,21 @@ function fetchUsers(data) {
   const galleryOfUsers = ""
   var i;
   for (i = 0; i < data.length; i++) {
-    
-
-    }
- 
- 
- 
- 
- 
- 
+    galleryOfUsers += 
+`
  <div class="card">
-                    <div class="card-img-container">
-                        <img class="card-img" src="https://placehold.it/90x90" alt="profile picture">
-                    </div>
-                    <div class="card-info-container">
-                        <h3 id="name" class="card-name cap">first last</h3>
-                        <p class="card-text">email</p>
-                        <p class="card-text cap">city, state</p>
-                    </div>
-                </div>
+     <div class="card-img-container">
+       <img class="card-img" src="${data[i].picture.large}" alt="profile picture">
+      </div>
+      <div class="card-info-container">
+       <h3 id="name" class="card-name cap">${data[i].name.first} ${data[i].name.last}</h3>
+       <p class="card-text">${data[i].email}</p>
+       <p class="card-text cap">${data[i].location.city}</p>
+     </div>
+ </div>
+ `;
+document.querySelector('#gallery').innerHTML = galleryOfUsers;
+
 }
 
 
