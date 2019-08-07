@@ -5,6 +5,15 @@
  * app.js */
 
 console.log('inscript');
+
+// fetching data from url.
+fetch('https://randomuser.me/api/')
+  .then(response => response.json()) 
+  .then(data => getUsers(data.result)); 
+  
+
+
+
 // var request = new HMLHttRequest();
 // request.data = function () {
     
