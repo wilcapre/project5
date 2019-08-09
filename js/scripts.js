@@ -5,6 +5,11 @@
  * app.js */
 
 //console.log('inscript');
+const modalList = document.createElement('div')
+modalList.className = 'modal-container';
+//modalList.style.display = 'none';
+const script = document.getElementsByTagName('script')
+document.body.insertBefore(modalList, script[0])
 
 // fetching data from url.
 fetch('https://randomuser.me/api?results=12&nat=us')
@@ -16,6 +21,7 @@ function fetchUsers(data) {
   let galleryOfUsers = ""
   for (let i = 0; i < data.length; i++) {
     galleryOfUsers += 
+    //Html for the gallery modul of the 12 users
 `
  <div class="card">
      <div class="card-img-container">
@@ -32,37 +38,43 @@ function fetchUsers(data) {
 
   $('.card').on('click', function(){
     let thisIndex = $('.card').index(this);
-    modalMarkup(data[thisIndex]);
+    fetchDirectory(data[thisIndex]);
   });
   } 
+
 }
 
-fetch('https://randomuser.me/api?inc=image,name,location,email,cell,birthday,address')
-  .then(response => response.json()) 
-  .then(data => fetchDirectory(data.results)); 
+// fetch('https://randomuser.me/api?inc=image,name,location,email,cell,birthday,address')
+//   .then(response => response.json()) 
+//   .then(data => fetchDirectory(data.results)); 
+
+//fetch directory
 
 function fetchDirectory(data) {
-  let modalCloseBtn = ""
+  let modalHtml = ""
   for (let i = 0; i < data.length; i++) {
-     modalCloseBtn  += 
+    // format date of birth
+  
+     modalHtml  += 
+     //Html to show directory of users
 `
 <div class="modal-container">
 <div class="modal">
     <button type="button" id="modal-close-btn" class="modal-close-btn"><strong>X</strong></button>
     <div class="modal-info-container">
-        <img class="modal-img" src="${data[i].picture}" alt="profile picture">
-        <h3 id="name" class="modal-name cap">${data[i].name}</h3>
+        <img class="modal-img" src="${data[i].picture.large}" alt="profile picture">
+        <h3 id="name" class="modal-name cap">${data[i].name.first} ${data[i].name.last}</h3>
         <p class="modal-text">${data[i].email}</p>
-        <p class="modal-text cap">${data[i].city}</p>
+        <p class="modal-text cap">${data[i].location.city}</p>
         <hr>
-        <p class="modal-text">${data[i].cell}(555)555-5555</p>
-        <p class="modal-text">${data[i].address}123 Portland Ave., Portland, OR 97204</p>
-        <p class="modal-text">${data[i].Birthday} 10/21/2015</p>
+        <p class="modal-text">${data[i].cell}</p>
+        <p class="modal-text cap">${data[i].location.street} ${data[i].location.city} ${data[i].location.state} ${data[i].location.postcode}</p>
+        <p class="modal-text">${data[i].dob.date}</p>
     </div>
 </div>
 
  `; 
-  document.querySelector('#modalCloseBtn').innerHTML = modalCloseBtn;
+ modalList.innerHTML = modalHtml;
 
   $('.modal').on('click', function(){
     let thisIndex = $('.modal').index(this);
