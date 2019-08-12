@@ -21,7 +21,8 @@ function fetchUsers(data) {
   let galleryOfUsers = ""
   for (let i = 0; i < data.length; i++) {
     galleryOfUsers += 
-    //Html for the gallery modul of the 12 users
+    
+//Html for the gallery modul of the 12 users
 `
  <div class="card">
      <div class="card-img-container">
@@ -36,9 +37,9 @@ function fetchUsers(data) {
  `;
   document.querySelector('#gallery').innerHTML = galleryOfUsers;
 
-  $('.card').on('click', function(){
-    let thisIndex = $('.card').index(this);
-    fetchDirectory(data[thisIndex]);
+  $('.card').on('click',function(){
+    let currentIndex = $('.card').index(this);
+    modalMarkup(data[currentIndex]);
   });
   } 
 
@@ -50,15 +51,20 @@ function fetchUsers(data) {
 
 //fetch directory
 
-function fetchDirectory(data) {
-  let modalHtml = ""
-  for (let i = 0; i < data.length; i++) {
-    // format date of birth
-  
-     modalHtml  += 
-     //Html to show directory of users
+function fetchDirectory(info) { 
+// format date of birth https://www.w3schools.com/jsref/jsref_substr.asp
+  const dob = info.dob.date;
+  dob.split("\\-")
+  let month = dob.substr(5, 2);
+  let day = dob.substr(8, 2);
+  let year= dob.substr(2, 2);
+
+
+  let window = ""
+  window += `<div class=“modal-container”>`
+
+//Html to show directory of users
 `
-<div class="modal-container">
 <div class="modal">
     <button type="button" id="modal-close-btn" class="modal-close-btn"><strong>X</strong></button>
     <div class="modal-info-container">
@@ -69,12 +75,14 @@ function fetchDirectory(data) {
         <hr>
         <p class="modal-text">${data[i].cell}</p>
         <p class="modal-text cap">${data[i].location.street} ${data[i].location.city} ${data[i].location.state} ${data[i].location.postcode}</p>
-        <p class="modal-text">${data[i].dob.date}</p>
+        <p class="modal-text">Birthday:${month}/${day}/${year}</p>
     </div>
 </div>
 
  `; 
- modalList.innerHTML = modalHtml;
+
+  document.querySelector('div').innerHTML += window;
+
 
   $('.modal').on('click', function(){
     let thisIndex = $('.modal').index(this);
@@ -82,7 +90,7 @@ function fetchDirectory(data) {
   });
   }
 
-}
+
 // var request = new HMLHttRequest();
 // request.data = function () {
     
