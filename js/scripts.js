@@ -7,9 +7,14 @@
 //console.log('inscript');
 const modalList = document.createElement('div')
 modalList.className = 'modal-container';
-//modalList.style.display = 'none';
+modalList.style.display = 'none';
+//modalList.style.display = '';
 const script = document.getElementsByTagName('script')
 document.body.insertBefore(modalList, script[0])
+//append div to modalList 
+$('button').click(function() {
+  $('modalList').append('div');
+});
 
 // fetching data from url.
 fetch('https://randomuser.me/api?results=12&nat=us')
@@ -36,10 +41,11 @@ function fetchUsers(data) {
  </div>
  `;
   document.querySelector('#gallery').innerHTML = galleryOfUsers;
-
+  let modalMarkup = index;
   $('.card').on('click',function(){
     let currentIndex = $('.card').index(this);
     modalMarkup(data[currentIndex]);
+    
   });
   } 
 
@@ -60,8 +66,8 @@ function fetchDirectory(info) {
   let year= dob.substr(2, 2);
 
 
-  let window = ""
-  window += `<div class=“modal-container”>`
+  //let window = ""
+  //window += `<div class=“modal-container”>`
 
 //Html to show directory of users
 `
@@ -81,7 +87,7 @@ function fetchDirectory(info) {
 
  `; 
 
-  document.querySelector('div').innerHTML += window;
+  //document.querySelector('div').innerHTML += window;
 
 
   $('.modal').on('click', function(){
