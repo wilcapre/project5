@@ -40,11 +40,12 @@ function fetchUsers(data) {
      </div>
  </div>
  `;
+ let modalMarkup;
   document.querySelector('#gallery').innerHTML = galleryOfUsers;
-  let modalMarkup = index;
   $('.card').on('click',function(){
     let currentIndex = $('.card').index(this);
-    modalMarkup(data[currentIndex]);
+   // modalMarkup(data[currentIndex]);
+    //console.log(typeof data[currentIndex]);
     
   });
   } 
