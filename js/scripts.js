@@ -36,9 +36,8 @@ function fetchUsers(data) {
     galleryOfUsers.push(users);
 
   }
-  $('#gallery').append(galleryOfUsers);
-  
-for (let i=0; i<$('.card').length; i++){
+  $('#gallery').append(galleryOfUsers); 
+  for (let i=0; i<$('.card').length; i++){
   $('.card').eq(i).on('click', function(event) {
     fetchDirectory(data[i])
   })
@@ -58,7 +57,7 @@ function fetchDirectory(data) {
 let window = 
   //window += `<div class=“modal-container”>`
 
-//Html to show directory of users
+//Html to show directory of users that includes all informations
 `
 <div class="modal">
     <button type="button" id="modal-close-btn" class="modal-close-btn"><strong>X</strong></button>
@@ -77,7 +76,7 @@ let window =
  `; 
  $('.modal-container').html(window).show();
 
- //close up window for when you click on the user
+ //close up window for when you click and exit out on the user
  $('#modal-close-btn').on('click', function (){
       $('.modal-container').hide();
   })
