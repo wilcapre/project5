@@ -21,7 +21,7 @@ fetch('https://randomuser.me/api?results=12&nat=us')
 function fetchUsers(data) {
   let galleryOfUsers = []
   for (let i = 0; i < data.length; i++) {
-  //Html for the gallery modal of the 12 users
+  //Html for the gallery modal window of the 12 users
     const users = ($(`
     <div class="card">
         <div class="card-img-container">
